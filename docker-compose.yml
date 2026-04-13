@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  airflow-streamlit:
+    image: hasan05/ml-airflow-streamlit-app:latest
+    container_name: airflow-streamlit-app
+    ports:
+      - "30005:8501"
+    volumes:
+      - /var/lib/airflow_data:/tmp
+    networks:
+      - ml_network
+    restart: always
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+networks:
+  ml_network:
+    driver: bridge
